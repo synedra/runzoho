@@ -2,6 +2,8 @@
 
 This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post].
 
+<img width="985" height="829" alt="image" src="https://github.com/user-attachments/assets/4f1fa845-026c-4cbe-a8f7-7b12a793166f" />
+
 ## Overview
 
 The application routes all requests through RunAlloy's connector system to interact with Zoho CRM Tasks module. This provides several benefits:
