@@ -1,6 +1,6 @@
 # Zoho CRM Tasks Integration
 
-This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post].
+This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post](https://github.com/synedra/runzoho/BLOG_POST.md).
 
 ## Prerequisites
 - Httpie (instructions below)
@@ -9,19 +9,17 @@ This application uses Zoho CRM Tasks as the backend for a simplified todo list f
 - [Zoho](https://zoho.com) account
 - [RunAlloy](https://runalloy.com) API token
 
-
-
 ## Setup
 
 <details><summary>1. Environment Variables</summary>
 
-#### a. Get Your Credentials
+**Get Your Credentials**
 
 1. **RunAlloy API Key**: Get from RunAlloy dashboard → Settings → API Keys
 2. **Zoho CRM Connector**: Configure the Zoho CRM connector in RunAlloy dashboard
 3. **Zoho OAuth Credentials**: These are used by RunAlloy internally for the Zoho CRM connector
 
-#### b. Set Your Environment Variables
+**Set Your Environment Variables**
 Add these variables to your `.env` file:
 
 ```bash
@@ -36,7 +34,6 @@ ZOHO_CLIENT_SECRET=your_zoho_client_secret
 </details>
 
 <details><summary>Httpie Setup</summary></summary></details>
-### 2. Setup httpie
 
 Curl is kind of a pain for making API calls, as you need to set the headers separately each time.  We'll use 'httpie', a command line option that allows you to set up your headers for every call.
 
@@ -55,7 +52,7 @@ Create your config file.  This instructs httpie to use the correct header file f
 
 Save this as `~/.config/httpie/config.json` (create the directory if it doesn't exist).
 
-### 3. **Create session file**
+3. **Create session file**
 Add the session header file to complete this setup:
 
 ```json
@@ -90,7 +87,7 @@ Add the session header file to complete this setup:
 
 Save this as `~/.config/httpie/default_headers_session.json` 
 
-### 4. Test it out
+Test it out
 
 Run the following command to check your httpie setup:
 
