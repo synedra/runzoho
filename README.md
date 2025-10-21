@@ -11,7 +11,7 @@ This application uses Zoho CRM Tasks as the backend for a simplified todo list f
 
 
 
-## Setup
+## Setup (click section name for details)
 
 <details><summary>Environment Variables</summary>
 
