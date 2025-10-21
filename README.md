@@ -151,7 +151,7 @@ Browse to `https://<yourappname>.netlify.app` and you should be given the chance
 
 </details>
 
-<details><summary>Create credential</summary></details>
+<details><summary>Create credential</summary>
 
 In your terminal window do the following:
 
