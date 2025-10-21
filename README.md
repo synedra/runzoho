@@ -1,33 +1,6 @@
-# Zoho CRM Tasks Integration Guide
+# Zoho CRM Tasks Integration
 
 This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post].
-
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/2a41f8dc-9dfe-4c13-86f7-68aecc1811cd" />
-
-
-## Overview
-
-The application routes all requests through RunAlloy's connector system to interact with Zoho CRM Tasks module. This provides several benefits:
-
-- **Centralized Authentication**: RunAlloy manages OAuth credentials and tokens for Zoho
-- **Connectivity API**: Consistent interface across different connectors
-- **Better Error Handling**: Standardized error responses
-- **Rate Limiting**: Built-in rate limit management
-- **Monitoring**: Track API usage through RunAlloy dashboard
-
-## Architecture
-
-```
-Frontend (React) - Single Task List
-    ↓
-Netlify Functions (zoho-tasks.cjs)
-    ↓
-RunAlloy Helper (runalloy-helper.cjs)
-    ↓
-RunAlloy API
-    ↓
-Zoho CRM Tasks Module
-```
 
 ## Prerequisites
 - Httpie (instructions below)
@@ -35,6 +8,8 @@ Zoho CRM Tasks Module
 - [Netlify](https://netlify.com) account
 - [Zoho](https://zoho.com) account
 - [RunAlloy](https://runalloy.com) API token
+
+<details><summary>Setup</summary>
 
 ## Setup
 
@@ -58,7 +33,7 @@ RUNALLOY_API_URL=https://production.runalloy.com
 ZOHO_CLIENT_ID=your_zoho_client_id
 ZOHO_CLIENT_SECRET=your_zoho_client_secret
 ```
-
+</details>
 ### 2. Setup httpie
 
 Curl is kind of a pain for making API calls, as you need to set the headers separately each time.  We'll use 'httpie', a command line option that allows you to set up your headers for every call.
