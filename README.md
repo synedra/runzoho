@@ -9,11 +9,11 @@ This application uses Zoho CRM Tasks as the backend for a simplified todo list f
 - [Zoho](https://zoho.com) account
 - [RunAlloy](https://runalloy.com) API token
 
-<details><summary>Setup</summary>
+
 
 ## Setup
 
-### 1. Environment Variables
+<details><summary>1. Environment Variables</summary>
 
 #### a. Get Your Credentials
 
@@ -34,6 +34,8 @@ ZOHO_CLIENT_ID=your_zoho_client_id
 ZOHO_CLIENT_SECRET=your_zoho_client_secret
 ```
 </details>
+
+<details><summary>Httpie Setup</summary></summary></details>
 ### 2. Setup httpie
 
 Curl is kind of a pain for making API calls, as you need to set the headers separately each time.  We'll use 'httpie', a command line option that allows you to set up your headers for every call.
@@ -99,6 +101,7 @@ https https://production.runalloy.com/connectors
 You can see all the connectors here.  We'll be using the 'zohoCRM' connector for the todo list.
 
 For production, you will want to create this workflow dynamically, but for this example we will create the user and credential using the CLI, then plug them into the code.
+</details>
 
 ## Create a user and credential
 
