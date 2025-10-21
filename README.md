@@ -1,6 +1,6 @@
 # Zoho CRM Tasks Integration
 
-This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post](https://github.com/synedra/runzoho/BLOG_POST.md).
+This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post].
 
 ## Prerequisites
 - Httpie (instructions below)
@@ -8,6 +8,8 @@ This application uses Zoho CRM Tasks as the backend for a simplified todo list f
 - [Netlify](https://netlify.com) account
 - [Zoho](https://zoho.com) account
 - [RunAlloy](https://runalloy.com) API token
+
+
 
 ## Setup
 
@@ -33,7 +35,8 @@ ZOHO_CLIENT_SECRET=your_zoho_client_secret
 ```
 </details>
 
-<details><summary>Httpie Setup</summary></summary></details>
+<details><summary>Httpie Setup</summary></summary>
+### 2. Setup httpie
 
 Curl is kind of a pain for making API calls, as you need to set the headers separately each time.  We'll use 'httpie', a command line option that allows you to set up your headers for every call.
 
@@ -52,7 +55,7 @@ Create your config file.  This instructs httpie to use the correct header file f
 
 Save this as `~/.config/httpie/config.json` (create the directory if it doesn't exist).
 
-3. **Create session file**
+**Create session file**
 Add the session header file to complete this setup:
 
 ```json
@@ -87,7 +90,7 @@ Add the session header file to complete this setup:
 
 Save this as `~/.config/httpie/default_headers_session.json` 
 
-Test it out
+**Test it out**
 
 Run the following command to check your httpie setup:
 
