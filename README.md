@@ -13,7 +13,7 @@ This application uses Zoho CRM Tasks as the backend for a simplified todo list f
 
 ## Setup
 
-<details><summary>1. Environment Variables</summary>
+<details><summary>Environment Variables</summary>
 
 **Get Your Credentials**
 
@@ -103,9 +103,8 @@ You can see all the connectors here.  We'll be using the 'zohoCRM' connector for
 For production, you will want to create this workflow dynamically, but for this example we will create the user and credential using the CLI, then plug them into the code.
 </details>
 
-## Create a user and credential
-
-### 1. Create the user
+<details><summary>Create user</summary>
+**Create the user**
 Run the following command to create a new user.
 ``` bash
 https https://production.runalloy.com/users \
@@ -122,12 +121,15 @@ https https://production.runalloy.com/users
 Pick the user matching the email you used.  In the default_headers_session.json file (in ~/.config/httpie) change the x-alloy-userid to the user you just created.
 
 Update the Authorization entry so that it is "Bearer <RUNALLOY_API_KEY>"
+</details>
 
-### 2. Setup your netlify environment
+<details><summary>Setup netlify</summary>
+	
+**Setup your netlify environment**
 
 To use this repository, you will need to get netlify set up.
 
-#### a. Setup the repository and application
+**Setup the repository and application**
 
 Click the following button to deploy the codebase to Netlify.  You need to have a Netlify account for this to work.
 
@@ -143,10 +145,13 @@ cd zoho-<github-username>
 npm install
 ```
 
-#### b. Check the deploy
+**Check the deploy**
 
 Browse to `https://<yourappname>.netlify.app` and you should be given the chance to login with an email address.  Wait for a moment as we need to create the credential first.
 
+</details>
+
+<details><summary>Create credential</summary></details>
 ### 2. Create the credential
 
 In your terminal window do the following:
@@ -186,8 +191,9 @@ In netlify/functions/zoho-tasks.cjs update the following lines:
     globalState.set("userId", "<userid from create command>");
     globalState.set("credentialId", "<credential from list of credentials>");
 ```
+</details>
 
-### 3. Test locally
+**Test locally**
 
 In your working directory, start the test server.
 
@@ -195,7 +201,7 @@ In your working directory, start the test server.
 netlify dev
 ```
 
-### 4. Deploy to the web
+**Deploy to the web**
 
 ```
 netlify deploy --prod
