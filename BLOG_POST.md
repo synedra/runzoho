@@ -206,7 +206,7 @@ https https://production.runalloy.com/connectors/zohoCRM/credentials \
     data:='{"region":"com"}'
 ```
 
-This returns an OAuth URL. Open it, sign in to Zoho, and grant permissions. If you get an error, make sure that you've done the Netlify deploy step above.
+This returns an OAuth URL. Open it, sign in to Zoho, and grant permissions. If you get a 404 or server error, make sure that you've done the Netlify deploy step above.
 
 After that, list credentials to get the `credentialId`:
 
