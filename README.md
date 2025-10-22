@@ -188,11 +188,13 @@ In netlify/functions/zoho-tasks.cjs update the following lines:
 
 **Test locally**
 
-In your working directory, start the test server.
+In your working directory, finish Netlify setup and start the development server.  Be sure to choose the project you just created for 'netlify link'.  
+
+_Note: The env:insert function uploads your .env file settings to Netlify, so if you need to change them or add to them you'll need to do the env:import again._
 
 ```
 npm install netlify-cli
-netlify link (choose the project you just created)
+netlify link 
 netlify env:import .env
 netlify dev
 ```
