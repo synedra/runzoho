@@ -29,7 +29,6 @@ RUNALLOY_API_URL=https://production.runalloy.com
 </details>
 
 <details><summary>2. Httpie Setup</summary></summary>
-### 2. Setup httpie
 
 Curl is kind of a pain for making API calls, as you need to set the headers separately each time.  We'll use 'httpie', a command line option that allows you to set up your headers for every call.
 
