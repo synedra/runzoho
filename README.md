@@ -195,6 +195,9 @@ In netlify/functions/zoho-tasks.cjs update the following lines:
 In your working directory, start the test server.
 
 ```
+npm install netlify-cli
+netlify link (choose the project you just created)
+netlify env:import .env
 netlify dev
 ```
 
@@ -204,3 +207,4 @@ netlify dev
 netlify deploy --prod
 ```
 
+Your site is now running on https://<your-netlify-app>.netlify.app!  Feel free to use this example as a jumping off point for more elaborate integrations with the Zoho CRM system.
