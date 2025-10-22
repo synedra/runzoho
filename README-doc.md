@@ -43,7 +43,6 @@ Zoho CRM Tasks Module
 2. **RunAlloy API URL**: https://production.runalloy.com
 3. **Zoho CRM Connector**: Configure the Zoho CRM connector in RunAlloy dashboard
 
-#### b. Set Your Environment Variables
 Add these variables to your `.env` file.  Be sure to add ".env" to your .gitignore file to prevent committing secrets.
 
 ```bash
@@ -96,17 +95,19 @@ Add the session header file to complete this setup:
 	},
 	{
 	    "name": "Authorization",
-	    "value": "Bearer j3oDqPBhf-ZuTGHeDf2Ru"
+	    "value": "Bearer RUNALLOY_API_KEY"
 	},
 	{
 	    "name": "x-alloy-userid",
-	    "value": "68f1e561ba205b5a3bf234c8"
+	    "value": "<TO BE SET>"
 	}
     ]
 }
 ```
 
 Save this as `~/.config/httpie/default_headers_session.json` 
+
+You don't need to worry about the x-alloy-userid yet,  we'll set it in the next section.  
 
 ### 4. Test it out
 
@@ -118,11 +119,10 @@ https https://production.runalloy.com/connectors
 
 You can see all the connectors in the response to this endpoint.  We'll be using the 'zohoCRM' connector for the todo list.
 
-For production, you will want to create this workflow dynamically, but for this example we will create the user and credential using the CLI, then plug them into the code.
+For production, you will want to create the user and credential dynamically, but for this example we will create them using the CLI, then plug them into the code.  Don't do this in production.  Please.
 
 ## Create a user 
 
-### 1. Create the user
 Run the following command to create a new user.
 ``` bash
 https https://production.runalloy.com/users \
@@ -130,23 +130,25 @@ username="<your email address>" \
 fullName="<Full name>"
 ```
 
-This will return a string which you will use for your userId (like '68f1e561ba205b5a3bf234c8').  If you lose this string, you can find the user with the following command:
+This will return a string which you will use for your userId (like '68f1e561ba205b5a3bf234c8').  
+
+If you lose this string, you can find the user with the following command:
 
 ``` bash
 https https://production.runalloy.com/users
 ```
 
-Pick the user matching the email you used.  In the default_headers_session.json file (in ~/.config/httpie) change the x-alloy-userid to the user you just created, or add an entry for the x-alloy-userid if it isn't there, following the pattern of the other headers.
+Pick the user matching the email you used.  In the default_headers_session.json file (in ~/.config/httpie) change the x-alloy-userid to the user you just created.
 
-Update the Authorization entry so that it is "Bearer <RUNALLOY_API_KEY>"
+So the 
 
-### 2. Setup your netlify environment
+## Setup your netlify environment
 
 To use this repository, you will need to get netlify set up.
 
-#### a. Setup the repository and application
+### 1. Setup the repository and application
 
-Click the following button to deploy the codebase to Netlify.  You need to have a Netlify account for this to work.
+Click the following button to deploy the codebase to Netlify.  You can make a netlify account as part of the process.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/synedra/runzoho)
 
@@ -162,14 +164,16 @@ npm install
 
 #### b. Check the deploy
 
-Browse to `https://<yourappname>.netlify.app` and you should be given the chance to login with an email address.  Wait for a moment as we need to create the credential first.
+The first thing that Netlify will do is build and deploy your project.  The project page will let you know when the deploy is done.
+
+Browse to `https://<yourappname>.netlify.app` and you should be given the chance to login with an email address.  Wait for a moment before logging in.
 
 ### 2. Create the credential
 
 In your terminal window do the following:
 
 ``` bash
-https https://production.runalloy.com/connectors/zohoCRM/credentials \ userId=68f1e561ba205b5a3bf234c8 \
+https https://production.runalloy.com/connectors/zohoCRM/credentials \ userId=<RUNALLOY_USER_ID> \
 authenticationType=oauth2 \
 redirectUri=https://<yournetlifyapp>.netlify.app/.netlify/functions/zoho-auth \
 data:='{"region":"com"}'
@@ -177,7 +181,7 @@ data:='{"region":"com"}'
 
 This will give you an oauth URL.  Copy and paste that URL into your browser window and it will let you login with Zoho - if you don't have a Zoho account already, create one now.  If the OAuth redirect doesn't take you to a screen asking for your email, make sure you've done the Netlify setup above and check Netlify to make sure the deploy has completed correctly.
 
-After you've done the OAuth login, your credential should be available.  Check the credentials to find the one you created.
+After you've done the OAuth login, your credential should be available.  Make a call to the credentials endpoint to find the one you created.
 
 ``` bash
 https://production.runalloy.com/connectors/zohoCRM/credentials
