@@ -39,23 +39,17 @@ Zoho CRM Tasks Module
 
 ### 1. Environment Variables
 
-#### a. Get Your Credentials
-
 1. **RunAlloy API Key**: Get from RunAlloy dashboard → Settings → API Keys
-2. **Zoho CRM Connector**: Configure the Zoho CRM connector in RunAlloy dashboard
-3. **Zoho OAuth Credentials**: These are used by RunAlloy internally for the Zoho CRM connector
+2. **RunAlloy API URL**: https://production.runalloy.com
+3. **Zoho CRM Connector**: Configure the Zoho CRM connector in RunAlloy dashboard
 
 #### b. Set Your Environment Variables
-Add these variables to your `.env` file:
+Add these variables to your `.env` file.  Be sure to add ".env" to your .gitignore file to prevent committing secrets.
 
 ```bash
 # RunAlloy API Configuration
 RUNALLOY_API_KEY=your_api_key_here
 RUNALLOY_API_URL=https://production.runalloy.com
-
-# Zoho OAuth Configuration 
-ZOHO_CLIENT_ID=your_zoho_client_id
-ZOHO_CLIENT_SECRET=your_zoho_client_secret
 ```
 
 ### 2. Setup httpie
@@ -126,7 +120,7 @@ You can see all the connectors in the response to this endpoint.  We'll be using
 
 For production, you will want to create this workflow dynamically, but for this example we will create the user and credential using the CLI, then plug them into the code.
 
-## Create a user and credential
+## Create a user 
 
 ### 1. Create the user
 Run the following command to create a new user.
@@ -142,7 +136,7 @@ This will return a string which you will use for your userId (like '68f1e561ba20
 https https://production.runalloy.com/users
 ```
 
-Pick the user matching the email you used.  In the default_headers_session.json file (in ~/.config/httpie) change the x-alloy-userid to the user you just created.
+Pick the user matching the email you used.  In the default_headers_session.json file (in ~/.config/httpie) change the x-alloy-userid to the user you just created, or add an entry for the x-alloy-userid if it isn't there, following the pattern of the other headers.
 
 Update the Authorization entry so that it is "Bearer <RUNALLOY_API_KEY>"
 
