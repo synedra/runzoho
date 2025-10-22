@@ -16,8 +16,7 @@ This application uses Zoho CRM Tasks as the backend for a simplified todo list f
 **Get Your Credentials**
 
 1. **RunAlloy API Key**: Get from RunAlloy dashboard → Settings → API Keys
-2. **Zoho CRM Connector**: Configure the Zoho CRM connector in RunAlloy dashboard
-3. **Zoho OAuth Credentials**: These are used by RunAlloy internally for the Zoho CRM connector
+2. **RunAlloy API URL**: https://production.runalloy.com
 
 **Set Your Environment Variables**
 Add these variables to your `.env` file:
@@ -26,10 +25,6 @@ Add these variables to your `.env` file:
 # RunAlloy API Configuration
 RUNALLOY_API_KEY=your_api_key_here
 RUNALLOY_API_URL=https://production.runalloy.com
-
-# Zoho OAuth Configuration 
-ZOHO_CLIENT_ID=your_zoho_client_id
-ZOHO_CLIENT_SECRET=your_zoho_client_secret
 ```
 </details>
 
@@ -54,7 +49,7 @@ Create your config file.  This instructs httpie to use the correct header file f
 Save this as `~/.config/httpie/config.json` (create the directory if it doesn't exist).
 
 **Create session file**
-Add the session header file to complete this setup:
+Add the session header file to complete this setup.  Update the Authorization header so it is "Bearer <RUNALLOY_API_KEY>".  You will update the userid in the next step.
 
 ```json
 {
@@ -76,11 +71,7 @@ Add the session header file to complete this setup:
 	},
 	{
 	    "name": "Authorization",
-	    "value": "Bearer j3oDqPBhf-ZuTGHeDf2Ru"
-	},
-	{
-	    "name": "x-alloy-userid",
-	    "value": "68f1e561ba205b5a3bf234c8"
+	    "value": "Bearer **<RUNALLOY_API_KEY>**"
 	}
     ]
 }
@@ -116,16 +107,22 @@ This will return a string which you will use for your userId (like '68f1e561ba20
 https https://production.runalloy.com/users
 ```
 
-Pick the user matching the email you used.  In the default_headers_session.json file (in ~/.config/httpie) change the x-alloy-userid to the user you just created.
+Pick the user matching the email you used.  In the httpie configuration file at ~/.config/httpie/default_headers_session.json) add the x-alloy-userid to the file.  Use the userId you just created, not the one currently in the file.
 
-Update the Authorization entry so that it is "Bearer <RUNALLOY_API_KEY>"
+``` json
+,
+	{
+	    "name": "x-alloy-userid",
+	    "value": "USERID_FROM_RESPONSE"
+	}
+```
 </details>
 
-<details><summary>4. Setup netlify</summary>
+<details><summary>4. Setup Netlify</summary>
 	
-**Setup your netlify environment**
+**Setup your Netlify environment**
 
-To use this repository, you will need to get netlify set up.
+To use this repository, you will need to get Netlify set up.
 
 **Setup the repository and application**
 
