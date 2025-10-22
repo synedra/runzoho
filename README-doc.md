@@ -1,4 +1,4 @@
-# Zoho CRM Tasks Integration Guide
+# Zoho CRM Tasks Integration Documentation
 
 This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post].
 
@@ -178,11 +178,11 @@ In your terminal window do the following:
 ``` bash
 https https://production.runalloy.com/connectors/zohoCRM/credentials \ userId=68f1e561ba205b5a3bf234c8 \
 authenticationType=oauth2 \
-redirectUri=https://runzoho.netlify.app/.netlify/functions/zoho-auth \
+redirectUri=https://<yournetlifyapp>.netlify.app/.netlify/functions/zoho-auth \
 data:='{"region":"com"}'
 ```
 
-This will give you an oauth URL.  Copy and paste that URL into your browser window and it will let you login with Zoho - if you don't have a Zoho account already, create one now.
+This will give you an oauth URL.  Copy and paste that URL into your browser window and it will let you login with Zoho - if you don't have a Zoho account already, create one now.  If the OAuth redirect doesn't take you to a screen asking for your email, make sure you've done the Netlify setup above and check Netlify to make sure the deploy has completed correctly.
 
 After you've done the OAuth login, your credential should be available.  Check the credentials to find the one you created.
 
@@ -202,7 +202,7 @@ It will look like this:
         }
 ```
 
-Once you've found your credential you can update the code to use that credential.
+Once you've found your credential (it will have zohoCRM-oauth2 as the type and the name will include the FullName you used for your user) you can update the code to use that credential.
 
 In netlify/functions/zoho-tasks.cjs update the following lines:
 
@@ -211,12 +211,52 @@ In netlify/functions/zoho-tasks.cjs update the following lines:
     globalState.set("credentialId", "<credential from list of credentials>");
 ```
 
+Note that in a production environment, you would want to dynamically create the user and credential, but because there is some inconsistency in how the credentials are working, this sample application is hard-coding those values.
+
 ### 3. Test locally
 
-In your working directory, start the test server.
+In your working directory, install the Netlify CLI tools, finish the Netlify setup and start the test server.
 
 ```
+npm install -g netlify-cli
+netlify link (choose the project that was just created)
+netlify env:import .env
 netlify dev
 ```
 
 ### 4. Deploy to the web
+In your working directory, deploy the netlify instance.
+
+``` bash
+netlify deploy --prod
+```
+
+You should now be able to go to https://<yournetlifyapp>.netlify.app and see the application.
+
+---
+
+### Troubleshooting 
+
+**"Authorization token required"**
+- Check `RUNALLOY_API_KEY` in your environment variables
+- Ensure the API key is valid in the RunAlloy dashboard
+
+**"Credential ID required"**
+- Make sure your Zoho connector is configured and active in RunAlloy
+- The credentialId needs to be sent as part of the POST body
+- Verify the `credentialId` exists and hasn't expired
+
+**"Failed to fetch tasks"**
+- Confirm the Zoho connector has the right permissions for Tasks by checking the permissions set for the Zoho OAuth application.
+- Check for backend errors:
+  - Check the RunAlloy logs
+  - The App.js console logs show up in the developer tools' browser Javascript console
+  - Netlify functions have logs on the Netlify website for each project
+- Try the HTTPie test calls above to isolate where the failure happens
+
+**"Credential not found"**
+- This happens when the credential is not created correctly, for instance if the region is not set to 'com'.  To resolve this, do the credential creation step again and try the app with the new credential.
+
+**App not showing tasks**
+- If the app is not showing you tasks from Zoho, check the Zoho site to make sure there are tasks to display.
+---
