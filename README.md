@@ -9,11 +9,9 @@ This application uses Zoho CRM Tasks as the backend for a simplified todo list f
 - [Zoho](https://zoho.com) account
 - [RunAlloy](https://runalloy.com) API token
 
-
-
 ## Setup (click section name for details)
 
-<details><summary>Environment Variables</summary>
+<details><summary>1. Environment Variables</summary>
 
 **Get Your Credentials**
 
@@ -35,7 +33,7 @@ ZOHO_CLIENT_SECRET=your_zoho_client_secret
 ```
 </details>
 
-<details><summary>Httpie Setup</summary></summary>
+<details><summary>2. Httpie Setup</summary></summary>
 ### 2. Setup httpie
 
 Curl is kind of a pain for making API calls, as you need to set the headers separately each time.  We'll use 'httpie', a command line option that allows you to set up your headers for every call.
@@ -103,7 +101,7 @@ You can see all the connectors here.  We'll be using the 'zohoCRM' connector for
 For production, you will want to create this workflow dynamically, but for this example we will create the user and credential using the CLI, then plug them into the code.
 </details>
 
-<details><summary>Create user</summary>
+<details><summary>3. Create user</summary>
 **Create the user**
 Run the following command to create a new user.
 ``` bash
@@ -123,7 +121,7 @@ Pick the user matching the email you used.  In the default_headers_session.json 
 Update the Authorization entry so that it is "Bearer <RUNALLOY_API_KEY>"
 </details>
 
-<details><summary>Setup netlify</summary>
+<details><summary>4. Setup netlify</summary>
 	
 **Setup your netlify environment**
 
@@ -151,7 +149,7 @@ Browse to `https://<yourappname>.netlify.app` and you should be given the chance
 
 </details>
 
-<details><summary>Create credential</summary>
+<details><summary>5. Create credential</summary>
 
 In your terminal window do the following:
 
