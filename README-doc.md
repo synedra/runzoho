@@ -1,9 +1,8 @@
 # Zoho CRM Tasks Integration Documentation
 
-This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post].
+This application uses Zoho CRM Tasks as the backend for a simplified todo list functionality, integrated through RunAlloy.  You can find a more detailed description in this [blog post](https://github.com/synedra/runzoho/blob/main/BLOG_POST.md).
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/2a41f8dc-9dfe-4c13-86f7-68aecc1811cd" />
-
 
 ## Overview
 
