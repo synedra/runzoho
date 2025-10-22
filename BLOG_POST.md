@@ -54,7 +54,7 @@ If you have these ready, we’re off to the races.
 
 ---
 
-PART 1: Setting Up HTTPie for API Management 
+## PART 1: Setting Up HTTPie for API Management 
 
 Managing headers for every request gets old. HTTPie sessions let you store headers and reuse them. Clean, fast, and repeatable.
 
@@ -70,7 +70,7 @@ brew install httpie
 
 HTTPie sessions save headers so you don’t have to type them every time.
 
-Step 1: Create the HTTPie config directory:
+**Step 1:** Create the HTTPie config directory:
 
 ```bash
 mkdir -p ~/.config/httpie
@@ -86,7 +86,7 @@ Create `~/.config/httpie/config.json`:
 }
 ```
 
-Step 2: Create the session file with your RunAlloy credentials:
+**Step 2:** Create the session file with your RunAlloy credentials:
 
 ```json
 {
@@ -118,7 +118,7 @@ Step 2: Create the session file with your RunAlloy credentials:
 }
 ```
 
-Step 3: Give it a spin:
+**Step 3:** Give it a spin:
 
 ```bash
 https https://production.runalloy.com/connectors
@@ -128,9 +128,7 @@ If your setup is correct, you'll get a list of connectors — including `zohoCRM
 
 ---
 
-PART 2: Deploying the App (do this before creating credentials so the OAuth redirect has somewhere to redirect **to**.)
-
-Important: Deploy the Netlify app before creating your RunAlloy Zoho credential.
+## PART 2: Deploying the App (do this before creating credentials so the OAuth redirect works)
 
 ### Quick Deploy with Netlify (one-click happiness)
 
@@ -144,7 +142,8 @@ This will:
 3. Set up automatic deploys
 
 Pick a unique name (like zoho-yourname). You’ll get a URL like `https://zoho-yourname.netlify.app`.
-PART 3: Setting Up RunAlloy Users and Credentials (the boring-but-essential part)
+
+## PART 3: Setting Up a RunAlloy User
 
 With Netlify deployed and HTTPie configured, let’s set up the RunAlloy bits.
 
@@ -156,10 +155,6 @@ Create a `.env` file (don’t commit secrets, so make sure that .env shows up in
 # RunAlloy API Configuration
 RUNALLOY_API_KEY=your_api_key_here
 RUNALLOY_API_URL=https://production.runalloy.com
-
-# Zoho OAuth Configuration
-ZOHO_CLIENT_ID=your_zoho_client_id
-ZOHO_CLIENT_SECRET=your_zoho_client_secret
 ```
 
 ### Local development
@@ -238,23 +233,26 @@ globalState.set("credentialId", "YOUR_CREDENTIAL_ID");
 
 ---
 
-PART 4: Testing and Development 
+## PART 4: Testing 
 
 ### Local testing
 
 Start Netlify Dev:
 
 ```bash
+npm install -g netlify-cli
+netlify link
+netlify env:import .env
 netlify dev
 ```
 
-Open http://localhost:3000 in your browser and try:
+Open http://localhost:8888 in your browser and try:
 - Viewing tasks from Zoho
 - Creating a new task
 - Updating a task (status, priority, due date)
 - Deleting a task
 
-Everything should sync with Zoho CRM. If it doesn’t, breathe, then check the troubleshooting tips below.
+Everything should sync with Zoho CRM. If it doesn’t, breathe, then check the [troubleshooting](#troubleshooting) tips below.
 
 ### Production deploy
 
@@ -266,7 +264,7 @@ netlify deploy --prod
 
 ---
 
-PART 5: Understanding the Code Architecture (what lives where)
+## PART 5: Understanding the Code Architecture (what lives where)
 
 Frontend (React):
 - App.js — main container handling UI and auth prompts
@@ -288,7 +286,7 @@ Key features:
 
 ---
 
-PART 6: Zoho CRM Field Mappings 
+## PART 6: Zoho CRM Field Mappings 
 
 We map Zoho CRM task fields into UI-friendly fields:
 
@@ -316,13 +314,10 @@ For Users:
 - Near real-time sync with Zoho CRM
 - Mobile-friendly, responsive layout
 
----
-
-
 
 ---
 
-Troubleshooting 
+## Troubleshooting 
 
 "Authorization token required"
 - Check `RUNALLOY_API_KEY` in your environment variables
