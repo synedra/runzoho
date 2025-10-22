@@ -109,10 +109,6 @@ Create `~/.config/httpie/config.json`:
         {
             "name": "Authorization",
             "value": "Bearer YOUR_RUNALLOY_API_KEY"
-        },
-        {
-            "name": "x-alloy-userid",
-            "value": "YOUR_USER_ID"
         }
     ]
 }
@@ -182,17 +178,22 @@ https https://production.runalloy.com/users \
     fullName="Your Full Name"
 ```
 
+_Note that httpie will process the above as a POST because of the formatting of the parameters with '='._
+
 This returns a user ID (for example: `68f1e561ba205b5a3bf234c8`). Update your HTTPie session file so the `x-alloy-userid` header uses this ID.
 
+<details><summary>Lost your userId?</summary>
 If you forget your userId string, list the RunAlloy users to find it by matching the email with the username:
 
 ```bash
 https https://production.runalloy.com/users
 ```
 
+</details>
+
 ### Create a Zoho CRM credential
 
-Use your deployed Netlify Functions URL as the redirect URI — e.g.:  
+Use your deployed Netlify Functions URL as the redirect URI for this command — e.g.:  
 `https://YOUR_APP_NAME.netlify.app/.netlify/functions/zoho-auth`
 
 Then run:
@@ -205,26 +206,21 @@ https https://production.runalloy.com/connectors/zohoCRM/credentials \
     data:='{"region":"com"}'
 ```
 
-This returns an OAuth URL. Open it, sign in to Zoho, and grant permissions. After that, list credentials to get the `credentialId`:
+This returns an OAuth URL. Open it, sign in to Zoho, and grant permissions. If you get an error, make sure that you've done the Netlify deploy step above.
+
+After that, list credentials to get the `credentialId`:
 
 ```bash
 https https://production.runalloy.com/connectors/zohoCRM/credentials
 ```
 
-You will want the credential for 'zohoCRM-oauth2' that has your user's FullName in the name of the credential.
-
-Copy the `credentialId` into `netlify/functions/zoho-tasks.cjs` 
-
-``` bash
-netlify deploy --prod
-```
-
-Your app is now available at https://<YOUR_APP_NAME>.netlify.app/
-
+You will want the credential for 'zohoCRM-oauth2' that has your user's FullName in the name of the credential for the next step.
 
 ### Configuration notes
 
-In `netlify/functions/zoho-tasks.cjs` you'll set:
+In `netlify/functions/zoho-tasks.cjs` you'll set the following variables.  
+
+_Note that in a production environment the user and credentials would be created and managed dynamically, but some of the credentials I created don't work correctly so for this demo I have hard-coded the user and credential values._
 
 ```javascript
 globalState.set("userId", "YOUR_USER_ID");
@@ -240,9 +236,6 @@ globalState.set("credentialId", "YOUR_CREDENTIAL_ID");
 Start Netlify Dev:
 
 ```bash
-npm install -g netlify-cli
-netlify link
-netlify env:import .env
 netlify dev
 ```
 
