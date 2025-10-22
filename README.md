@@ -137,6 +137,9 @@ Clone your newly created repository to your system and install the requirements.
 git clone https://github.com/<github-username>/zoho-<github-username>
 cd zoho-<github-username>
 npm install
+npm install -g netlify-cli
+netlify link
+netlify dev
 ```
 
 **Check the deploy**
@@ -150,9 +153,9 @@ Browse to `https://<yourappname>.netlify.app` and you should be given the chance
 In your terminal window do the following:
 
 ``` bash
-https https://production.runalloy.com/connectors/zohoCRM/credentials \ userId=68f1e561ba205b5a3bf234c8 \
+https https://production.runalloy.com/connectors/zohoCRM/credentials \ userId=<YOUR_USER_ID> \
 authenticationType=oauth2 \
-redirectUri=https://runzoho.netlify.app/.netlify/functions/zoho-auth \
+redirectUri=https://<your_netlify_app>.netlify.app/.netlify/functions/zoho-auth \
 data:='{"region":"com"}'
 ```
 
